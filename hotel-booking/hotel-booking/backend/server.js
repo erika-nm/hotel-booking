@@ -36,10 +36,6 @@ app.get("/", (req, res) => {
   res.send("Hotel Booking API Running");
 });
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
-
 app.get("/test-db", (req, res) => {
   db.query("SELECT 1", (err, result) => {
     if (err) {
@@ -51,4 +47,10 @@ app.get("/test-db", (req, res) => {
       result
     });
   });
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
