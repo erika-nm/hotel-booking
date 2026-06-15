@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Luxury Stay Hotel</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<!-- LOADING SCREEN -->
+
+<div id="loader">
+
+<div class="loader-logo">
+LUXURY HOTEL
+</div>
+
+<div class="loader-line"></div>
+
+</div>
+
+<!-- PAGE TRANSITION -->
+
+<div id="pageTransition"></div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+Luxury Stay
+</div>
+
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="admin.html">Admin</a></li>
+</ul>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="overlay">
+
+<h1>
+Experience Luxury Like Never Before
+</h1>
+
+<p>
+Premium rooms, unforgettable experiences,
+and world-class hospitality.
+</p>
+
+<a
+href="rooms.html"
+class="btn"
+id="bookBtn">
+Book Your Stay
+</a>
+
+</div>
+
+</section>
+
+<!-- CUSTOM CURSOR -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+const cursor = document.createElement("div");
+
+cursor.style.width = "14px";
+cursor.style.height = "14px";
+cursor.style.background = "#d4af37";
+cursor.style.borderRadius = "50%";
+cursor.style.position = "fixed";
+cursor.style.left = "0";
+cursor.style.top = "0";
+cursor.style.pointerEvents = "none";
+cursor.style.zIndex = "999999";
+cursor.style.transform = "translate(-50%, -50%)";
+cursor.style.boxShadow = "0 0 20px rgba(212,175,55,0.8)";
+
+document.body.appendChild(cursor);
+
+document.addEventListener("mousemove",(e)=>{
+
+cursor.style.left = e.clientX + "px";
+cursor.style.top = e.clientY + "px";
+
+});
+
+});
+
+</script>
+
+<!-- LOADER + TRANSITION -->
+
+<script>
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+document.getElementById("loader").style.opacity="0";
+
+setTimeout(()=>{
+
+document.getElementById("loader").style.display="none";
+
+},1000);
+
+},1800);
+
+});
+
+document
+.getElementById("bookBtn")
+.addEventListener("click",(e)=>{
+
+e.preventDefault();
+
+const url = e.currentTarget.href;
+
+document
+.getElementById("pageTransition")
+.style.transform =
+"translateY(0)";
+
+setTimeout(()=>{
+
+window.location.href = url;
+
+},900);
+
+});
+
+</script>
+
+</body>
+</html>

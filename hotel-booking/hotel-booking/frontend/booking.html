@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Room</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.booking-page{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#111;
+padding:50px;
+}
+
+.booking-card{
+width:100%;
+max-width:700px;
+background:#1a1a1a;
+padding:40px;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,.4);
+}
+
+.booking-card h1{
+text-align:center;
+margin-bottom:30px;
+color:#d4af37;
+}
+
+.booking-card input{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:none;
+border-radius:10px;
+background:#2a2a2a;
+color:white;
+}
+
+#roomInfo{
+background:#222;
+padding:20px;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+#priceInfo{
+background:#222;
+padding:20px;
+border-radius:10px;
+margin:20px 0;
+}
+
+.submit-btn{
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+background:#d4af37;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="booking-page">
+
+<div class="booking-card">
+
+<h1>Complete Your Booking</h1>
+
+<div id="roomInfo"></div>
+
+<form id="bookingForm">
+
+<input
+type="text"
+id="customer_name"
+placeholder="Full Name"
+required>
+
+<input
+type="email"
+id="email"
+placeholder="Email Address"
+required>
+
+<input
+type="text"
+id="phone"
+placeholder="Phone Number"
+required>
+
+<input
+type="date"
+id="check_in"
+required>
+
+<input
+type="date"
+id="check_out"
+required>
+
+<div id="priceInfo">
+
+<h3 id="nightCount">
+Lama Menginap: 0 malam
+</h3>
+
+<h2 id="totalPrice">
+Total: Rp 0
+</h2>
+
+</div>
+
+<button
+type="submit"
+class="submit-btn">
+
+Confirm Booking
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script src="js/booking.js"></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const cursor = document.createElement("div");
+
+    cursor.style.width = "14px";
+    cursor.style.height = "14px";
+    cursor.style.background = "#d4af37";
+    cursor.style.borderRadius = "50%";
+    cursor.style.position = "fixed";
+    cursor.style.left = "0";
+    cursor.style.top = "0";
+    cursor.style.pointerEvents = "none";
+    cursor.style.zIndex = "999999";
+    cursor.style.transform = "translate(-50%, -50%)";
+    cursor.style.boxShadow = "0 0 20px rgba(212,175,55,0.8)";
+
+    document.body.appendChild(cursor);
+
+    document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Jost',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+url("https://images.unsplash.com/photo-1566073771259-6a8506099945");
+background-size:cover;
+background-position:center;
+overflow:hidden;
+}
+
+.login-card{
+width:420px;
+max-width:90%;
+background:rgba(18,18,18,.95);
+padding:40px;
+border-radius:25px;
+border:1px solid rgba(212,175,55,.15);
+backdrop-filter:blur(10px);
+box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+.logo{
+text-align:center;
+font-size:60px;
+margin-bottom:10px;
+}
+
+h2{
+font-family:'Cormorant Garamond',serif;
+font-size:42px;
+text-align:center;
+color:#d4af37;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+color:#aaa;
+margin-bottom:30px;
+font-size:14px;
+}
+
+.input-group{
+margin-bottom:18px;
+}
+
+input{
+width:100%;
+padding:15px;
+border-radius:12px;
+border:1px solid rgba(212,175,55,.15);
+background:#1a1a1a;
+color:white;
+font-size:15px;
+outline:none;
+transition:.3s;
+}
+
+input:focus{
+border-color:#d4af37;
+box-shadow:0 0 15px rgba(212,175,55,.15);
+}
+
+input::placeholder{
+color:#888;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#d4af37;
+color:black;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 25px rgba(212,175,55,.3);
+}
+
+.footer{
+margin-top:20px;
+text-align:center;
+font-size:13px;
+color:#777;
+}
+
+@media(max-width:768px){
+
+.login-card{
+padding:30px;
+}
+
+h2{
+font-size:34px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-card">
+
+<h2>Admin Login</h2>
+
+<p class="subtitle">
+Luxury Hotel Management System
+</p>
+
+<div class="input-group">
+
+<input
+type="text"
+id="username"
+placeholder="Username">
+
+</div>
+
+<div class="input-group">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+</div>
+
+<button onclick="login()">
+Login
+</button>
+
+<div class="footer">
+© Luxury Hotel Dashboard
+</div>
+
+</div>
+
+<script src="js/login.js"></script>
+
+</body>
+</html>

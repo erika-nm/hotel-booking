@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Booking Success</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Jost',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.8)),
+url("https://images.unsplash.com/photo-1566073771259-6a8506099945");
+background-size:cover;
+background-position:center;
+padding:30px;
+}
+
+.card{
+width:650px;
+max-width:100%;
+background:rgba(20,20,20,.95);
+padding:40px;
+border-radius:25px;
+text-align:center;
+border:1px solid rgba(212,175,55,.2);
+box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+
+.success-icon{
+font-size:70px;
+margin-bottom:10px;
+}
+
+h1{
+font-family:'Cormorant Garamond',serif;
+font-size:48px;
+color:#d4af37;
+margin-bottom:20px;
+}
+
+#bookingId{
+font-size:28px;
+margin-bottom:25px;
+color:white;
+}
+
+#qrcode{
+display:flex;
+justify-content:center;
+margin:25px 0;
+}
+
+.info-box{
+background:#151515;
+padding:20px;
+border-radius:15px;
+margin-top:20px;
+text-align:left;
+border:1px solid rgba(212,175,55,.15);
+color:white;
+}
+
+.info-box p{
+margin-bottom:12px;
+font-size:16px;
+color:white;
+}
+
+.info-box span{
+color:white !important;
+}
+
+.info-box strong{
+color:#d4af37;
+}
+
+#bookingId{
+color:white;
+}
+
+.card{
+color:white;
+}
+
+.btn-group{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.btn{
+padding:14px 28px;
+border-radius:12px;
+font-weight:600;
+cursor:pointer;
+text-decoration:none;
+transition:.3s;
+}
+
+.home-btn{
+background:#d4af37;
+color:rgb(255, 253, 253);
+border:none;
+}
+
+.home-btn:hover{
+transform:translateY(-3px);
+}
+
+.invoice-btn{
+background:transparent;
+border:1px solid #d4af37;
+color:#d4af37;
+}
+
+.invoice-btn:hover{
+background:#d4af37;
+color:rgb(252, 249, 249);
+}
+
+@media(max-width:768px){
+
+.card{
+padding:25px;
+}
+
+h1{
+font-size:36px;
+}
+
+#bookingId{
+font-size:22px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="success-icon">
+✅
+</div>
+
+<h1>Booking Successful</h1>
+
+<h2 id="bookingId"></h2>
+
+<div id="qrcode"></div>
+
+<div class="info-box">
+
+<p><strong>Guest :</strong> <span id="guestName"></span></p>
+
+<p><strong>Email :</strong> <span id="guestEmail"></span></p>
+
+<p><strong>Phone :</strong> <span id="guestPhone"></span></p>
+
+<p><strong>Check In :</strong> <span id="checkIn"></span></p>
+
+<p><strong>Check Out :</strong> <span id="checkOut"></span></p>
+
+<p><strong>Total :</strong> <span id="totalPrice"></span></p>
+
+</div>
+
+<div class="btn-group">
+
+<button
+class="btn invoice-btn"
+id="downloadBtn">
+Download Invoice
+</button>
+
+<a
+href="index.html"
+class="btn home-btn">
+Back To Home
+</a>
+
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+
+const bookingId =
+localStorage.getItem("bookingId") || "-";
+
+const customerName =
+localStorage.getItem("customerName") || "-";
+
+const email =
+localStorage.getItem("email") || "-";
+
+const phone =
+localStorage.getItem("phone") || "-";
+
+const checkIn =
+localStorage.getItem("checkIn") || "-";
+
+const checkOut =
+localStorage.getItem("checkOut") || "-";
+
+const totalPrice =
+localStorage.getItem("totalPrice") || "0";
+
+document.getElementById("bookingId").innerText =
+"Booking ID : " + bookingId;
+
+document.getElementById("guestName").innerText =
+customerName;
+
+document.getElementById("guestEmail").innerText =
+email;
+
+document.getElementById("guestPhone").innerText =
+phone;
+
+document.getElementById("checkIn").innerText =
+checkIn;
+
+document.getElementById("checkOut").innerText =
+checkOut;
+
+document.getElementById("totalPrice").innerText =
+"Rp " +
+Number(totalPrice).toLocaleString("id-ID");
+
+/* QR SCAN DATA */
+
+const qrData = `
+HOTEL BOOKING VERIFIED
+
+Booking ID : ${bookingId}
+
+Guest : ${customerName}
+
+Email : ${email}
+
+Phone : ${phone}
+
+Check In : ${checkIn}
+
+Check Out : ${checkOut}
+
+Total : Rp ${Number(totalPrice).toLocaleString("id-ID")}
+
+Status : VALID
+`;
+
+new QRCode(
+document.getElementById("qrcode"),
+{
+text: qrData,
+width:220,
+height:220,
+colorDark:"#000000",
+colorLight:"#ffffff",
+correctLevel:QRCode.CorrectLevel.H
+}
+);
+
+document
+.getElementById("downloadBtn")
+.addEventListener("click", () => {
+
+window.print();
+
+});
+
+</script>
+
+</body>
+</html>
