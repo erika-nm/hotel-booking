@@ -539,10 +539,8 @@ async function changeStatus(id,status){
 
 function downloadInvoice(id){
 
-    window.open(
-        `https://hotel-booking-production-bccd.up.railway.app/api/invoice/${id}`,
-        "_blank"
-    );
+window.location.href =
+`https://hotel-booking-production-bccd.up.railway.app/api/invoice/${id}`;
 
 }
 
