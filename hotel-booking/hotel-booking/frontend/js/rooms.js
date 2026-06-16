@@ -2,46 +2,47 @@ const API_URL =
 "https://hotel-booking-production-bccd.up.railway.app";
 
 const roomContainer =
-document.getElementById(
-"roomContainer"
-);
+document.getElementById("roomContainer");
 
-fetch(
-`${API_URL}/api/rooms`
-)
+fetch(`${API_URL}/api/rooms`)
 .then(res => res.json())
 .then(data => {
 
+    roomContainer.innerHTML = "";
+
     data.forEach(room => {
+
+        const desc = room.description || "";
+
+const shortDesc =
+desc.length > 180
+? desc.substring(0,180) + "..."
+: desc;
 
         roomContainer.innerHTML += `
 
         <div class="room-card">
 
             <img
-src="${API_URL}/images/${room.image_url}"
-alt="${room.room_name}">
+            src="${API_URL}/images/${room.image_url}"
+            alt="${room.room_name}">
 
             <div class="room-content">
 
-                <h2>
-                ${room.room_name}
-                </h2>
+                <h2>${room.room_name}</h2>
 
-                <p>
-                ${room.description}
+                <p class="room-desc">
+                    ${shortDesc}
                 </p>
 
                 <div class="room-price">
-                Rp ${Number(room.price).toLocaleString("id-ID")}
+                    Rp ${Number(room.price).toLocaleString("id-ID")}
                 </div>
 
                 <button
                 class="book-btn"
                 onclick="bookRoom(${room.id})">
-
-                Book Now
-
+                    Book Now
                 </button>
 
             </div>
@@ -49,7 +50,6 @@ alt="${room.room_name}">
         </div>
 
         `;
-
     });
 
 })
@@ -64,12 +64,8 @@ alt="${room.room_name}">
 
 function bookRoom(id){
 
-    localStorage.setItem(
-    "roomId",
-    id
-    );
+    localStorage.setItem("roomId", id);
 
-    window.location.href =
-    "booking.html";
+    window.location.href = "booking.html";
 
 }
