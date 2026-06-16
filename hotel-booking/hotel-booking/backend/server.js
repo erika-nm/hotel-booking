@@ -66,7 +66,7 @@ app.get("/db-name", (req, res) => {
 
 const PORT = process.env.PORT || 8080;
 
-app.get("*", (req, res) => {
+app.use((req, res) => {
   res.sendFile(
     path.join(__dirname, "../frontend/index.html")
   );
