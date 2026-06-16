@@ -49,6 +49,16 @@ app.get("/test-db", (req, res) => {
   });
 });
 
+app.get("/db-name", (req, res) => {
+  db.query("SELECT DATABASE() AS db", (err, result) => {
+    if (err) {
+      return res.status(500).json(err);
+    }
+
+    res.json(result);
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
