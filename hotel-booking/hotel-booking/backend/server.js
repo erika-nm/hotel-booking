@@ -20,6 +20,11 @@ app.use(
         path.join(__dirname,"images")
     )
 );
+app.use(
+  express.static(
+    path.join(__dirname, "../frontend")
+  )
+);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/admin", adminRoutes);
@@ -60,6 +65,12 @@ app.get("/db-name", (req, res) => {
 });
 
 const PORT = process.env.PORT || 8080;
+
+app.get("*", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "../frontend/index.html")
+  );
+});
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
