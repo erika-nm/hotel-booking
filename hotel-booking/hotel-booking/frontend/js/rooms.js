@@ -1,10 +1,13 @@
+const API_URL =
+"https://hotel-booking-production-bccd.up.railway.app";
+
 const roomContainer =
 document.getElementById(
 "roomContainer"
 );
 
 fetch(
-"http://localhost:3000/api/rooms"
+`${API_URL}/api/rooms`
 )
 .then(res => res.json())
 .then(data => {
@@ -16,7 +19,7 @@ fetch(
         <div class="room-card">
 
             <img
-src="http://localhost:3000/images/${room.image_url}"
+src="${API_URL}/images/${room.image_url}"
 alt="${room.room_name}">
 
             <div class="room-content">
@@ -30,7 +33,7 @@ alt="${room.room_name}">
                 </p>
 
                 <div class="room-price">
-                Rp ${room.price.toLocaleString()}
+                Rp ${Number(room.price).toLocaleString("id-ID")}
                 </div>
 
                 <button
@@ -48,6 +51,14 @@ alt="${room.room_name}">
         `;
 
     });
+
+})
+.catch(error => {
+
+    console.error(error);
+
+    roomContainer.innerHTML =
+    "<p>Gagal memuat data kamar</p>";
 
 });
 

@@ -326,7 +326,7 @@ async function loadBookings(){
 
         const response =
         await fetch(
-        "http://localhost:3000/api/bookings"
+        "https://hotel-booking-production-bccd.up.railway.app/api/bookings"
         );
 
         const data =
@@ -456,7 +456,7 @@ async function editBooking(id){
     try{
 
         await fetch(
-        `http://localhost:3000/api/bookings/${id}`,
+        `https://hotel-booking-production-bccd.up.railway.app/api/bookings/${id}`,
         {
             method:"PUT",
             headers:{
@@ -497,7 +497,7 @@ async function deleteBooking(id){
     try{
 
         await fetch(
-        `http://localhost:3000/api/bookings/${id}`,
+        `https://hotel-booking-production-bccd.up.railway.app/api/bookings/${id}`,
         {
             method:"DELETE"
         });
@@ -523,7 +523,7 @@ async function deleteBooking(id){
 async function changeStatus(id,status){
 
     await fetch(
-        `http://localhost:3000/api/bookings/${id}/status`,
+        `https://hotel-booking-production-bccd.up.railway.app/api/bookings/${id}/status`,
         {
             method:"PUT",
             headers:{
@@ -540,7 +540,7 @@ async function changeStatus(id,status){
 function downloadInvoice(id){
 
     window.open(
-        `http://localhost:3000/api/invoice/${id}`,
+        `https://hotel-booking-production-bccd.up.railway.app/api/invoice/${id}`,
         "_blank"
     );
 

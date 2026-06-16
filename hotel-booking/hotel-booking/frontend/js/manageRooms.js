@@ -1,3 +1,6 @@
+const API_URL =
+"https://hotel-booking-production-bccd.up.railway.app";
+
 const roomTable =
 document.getElementById("roomTable");
 
@@ -5,7 +8,7 @@ async function loadRooms(){
 
     const response =
     await fetch(
-    "http://localhost:3000/api/rooms"
+    `${API_URL}/api/rooms`
     );
 
     const rooms =
@@ -29,19 +32,19 @@ async function loadRooms(){
 
             <td>
 
-    <button
-    class="edit-btn"
-    onclick="editRoom(${room.id})">
-    Edit
-    </button>
+                <button
+                class="edit-btn"
+                onclick="editRoom(${room.id})">
+                Edit
+                </button>
 
-    <button
-    class="delete-btn"
-    onclick="deleteRoom(${room.id})">
-    Hapus
-    </button>
+                <button
+                class="delete-btn"
+                onclick="deleteRoom(${room.id})">
+                Hapus
+                </button>
 
-</td>
+            </td>
 
         </tr>
         `;
@@ -66,13 +69,6 @@ document.getElementById("price").value;
 const imageFile =
 document.getElementById("roomImage").files[0];
 
-console.log({
-room_name,
-description,
-price,
-imageFile
-});
-
 if(!imageFile){
 alert("Pilih gambar terlebih dahulu");
 return;
@@ -87,26 +83,21 @@ imageFile
 
 const uploadResponse =
 await fetch(
-"http://localhost:3000/api/upload",
+`${API_URL}/api/upload`,
 {
 method:"POST",
 body:formData
 }
 );
 
-console.log("UPLOAD STATUS", uploadResponse.status);
-
 const uploadResult =
 await uploadResponse.json();
-
-console.log("UPLOAD RESULT", uploadResult);
 
 const image_url =
 uploadResult.filename;
 
-const response =
 await fetch(
-"http://localhost:3000/api/rooms",
+`${API_URL}/api/rooms`,
 {
 method:"POST",
 headers:{
@@ -120,13 +111,6 @@ image_url
 })
 }
 );
-
-console.log("ROOM STATUS", response.status);
-
-const result =
-await response.text();
-
-console.log("ROOM RESULT", result);
 
 alert("Kamar berhasil ditambahkan");
 
@@ -148,17 +132,11 @@ async function deleteRoom(id){
         return;
     }
 
-    const response = await fetch(
-    `http://localhost:3000/api/rooms/${id}`,
+    await fetch(
+    `${API_URL}/api/rooms/${id}`,
     {
         method:"DELETE"
     });
-
-    console.log("STATUS:", response.status);
-
-    const result = await response.text();
-
-    console.log("RESULT:", result);
 
     loadRooms();
 }
@@ -167,7 +145,7 @@ async function editRoom(id){
 
     const room =
     await fetch(
-    `http://localhost:3000/api/rooms/${id}`
+    `${API_URL}/api/rooms/${id}`
     ).then(res=>res.json());
 
     const room_name =
@@ -197,7 +175,7 @@ async function editRoom(id){
     if(!room_name) return;
 
     await fetch(
-    `http://localhost:3000/api/rooms/${id}`,
+    `${API_URL}/api/rooms/${id}`,
     {
         method:"PUT",
         headers:{

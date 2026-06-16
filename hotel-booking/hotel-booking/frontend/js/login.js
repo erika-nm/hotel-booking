@@ -1,3 +1,6 @@
+const API_URL =
+"https://hotel-booking-production-bccd.up.railway.app";
+
 async function login() {
 
   const username =
@@ -6,35 +9,44 @@ async function login() {
   const password =
   document.getElementById("password").value;
 
-  const response = await fetch(
-    "http://localhost:3000/api/admin/login",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        username,
-        password
-      })
-    }
-  );
+  try {
 
-  const data = await response.json();
-
-  if(data.success){
-
-    localStorage.setItem(
-      "admin",
-      JSON.stringify(data.admin)
+    const response = await fetch(
+      `${API_URL}/api/admin/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username,
+          password
+        })
+      }
     );
 
-    window.location.href =
-    "admin.html";
+    const data = await response.json();
 
-  }else{
+    if (data.success) {
 
-    alert("Login gagal");
+      localStorage.setItem(
+        "admin",
+        JSON.stringify(data.admin)
+      );
+
+      window.location.href =
+      "admin.html";
+
+    } else {
+
+      alert("Login gagal");
+
+    }
+
+  } catch (error) {
+
+    console.error(error);
+    alert("Gagal terhubung ke server");
 
   }
 

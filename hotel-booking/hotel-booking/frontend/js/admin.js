@@ -1,3 +1,6 @@
+const API_URL =
+"https://hotel-booking-production-bccd.up.railway.app";
+
 const table =
 document.getElementById("bookingTable");
 
@@ -9,9 +12,7 @@ async function loadBookings(){
     try{
 
         const response =
-        await fetch(
-        "http://localhost:3000/api/bookings"
-        );
+        await fetch(`${API_URL}/api/bookings`);
 
         const data =
         await response.json();
@@ -85,7 +86,7 @@ async function editBooking(id){
     prompt("Phone Baru");
 
     await fetch(
-        `http://localhost:3000/api/bookings/${id}`,
+        `${API_URL}/api/bookings/${id}`,
         {
             method:"PUT",
             headers:{
@@ -112,7 +113,7 @@ async function deleteBooking(id){
     }
 
     await fetch(
-        `http://localhost:3000/api/bookings/${id}`,
+        `${API_URL}/api/bookings/${id}`,
         {
             method:"DELETE"
         }

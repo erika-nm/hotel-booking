@@ -1,9 +1,12 @@
+const API_URL =
+"https://hotel-booking-production-bccd.up.railway.app";
+
 let roomPrice = 0;
 
 const roomId = localStorage.getItem("roomId");
 
 // Ambil data kamar
-fetch(`http://localhost:3000/api/rooms/${roomId}`)
+fetch(`${API_URL}/api/rooms/${roomId}`)
   .then(res => res.json())
   .then(room => {
 
@@ -11,9 +14,13 @@ fetch(`http://localhost:3000/api/rooms/${roomId}`)
 
     document.getElementById("roomInfo").innerHTML = `
       <h2>${room.room_name}</h2>
-      <p>Rp ${room.price.toLocaleString()} / malam</p>
+      <p>Rp ${Number(room.price).toLocaleString("id-ID")} / malam</p>
     `;
 
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Gagal mengambil data kamar");
   });
 
 // Hitung total harga
@@ -44,7 +51,7 @@ function calculatePrice() {
     `Lama Menginap: ${nights} malam`;
 
   document.getElementById("totalPrice").innerText =
-    `Total: Rp ${total.toLocaleString()}`;
+    `Total: Rp ${total.toLocaleString("id-ID")}`;
 }
 
 // Event tanggal
@@ -56,7 +63,7 @@ document
   .getElementById("check_out")
   .addEventListener("change", calculatePrice);
 
-  console.log("booking.js berhasil dimuat");
+console.log("booking.js berhasil dimuat");
 
 // Submit booking
 const form =
@@ -98,7 +105,7 @@ form.addEventListener("submit", async (e) => {
   try {
 
     const response = await fetch(
-      "http://localhost:3000/api/bookings",
+      `${API_URL}/api/bookings`,
       {
         method: "POST",
         headers: {
@@ -110,24 +117,20 @@ form.addEventListener("submit", async (e) => {
 
     const result = await response.json();
 
+    if (!response.ok) {
+      throw new Error(result.message || "Gagal booking");
+    }
+
     localStorage.setItem("bookingId", result.bookingId);
 
-localStorage.setItem("customerName", data.customer_name);
-localStorage.setItem("email", data.email);
-localStorage.setItem("phone", data.phone);
-localStorage.setItem("checkIn", data.check_in);
-localStorage.setItem("checkOut", data.check_out);
-localStorage.setItem("totalPrice", data.total_price);
+    localStorage.setItem("customerName", data.customer_name);
+    localStorage.setItem("email", data.email);
+    localStorage.setItem("phone", data.phone);
+    localStorage.setItem("checkIn", data.check_in);
+    localStorage.setItem("checkOut", data.check_out);
+    localStorage.setItem("totalPrice", data.total_price);
 
-window.location.href = "success.html";
-
-    form.reset();
-
-    document.getElementById("nightCount").innerText =
-      "Lama Menginap: 0 malam";
-
-    document.getElementById("totalPrice").innerText =
-      "Total: Rp 0";
+    window.location.href = "success.html";
 
   } catch (error) {
 
